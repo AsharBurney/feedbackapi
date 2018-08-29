@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CRUD OPERATIONS</title>	
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css" type="text/css"  />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"  />
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+
+	<!-- AJAX CALL STARTS HERE -->
+    <script type="text/javascript">  
+      function load()
+      {
+	      $.ajax({
+	        type : 'POST',
+	        crossDomain: true,
+	        url : 'http://127.0.0.1:5000/select',
+	        contentType: "application/json",
+	        success: function(data)
+	        {
+	          console.log(data);
+	          if(data != "empty")
+              {
+                var count = data.length;
+                console.log(count);
+                for (var i = 0; i < count; i++) 
+                {
+                	// console.log(data[i]['ADDRESS']);
+	                var tr = $('<tr/>');
+	                $(tr).append("<td>" + data[i].HHR_ID + "</td>");
+	                $(tr).append("<td>" + data[i].DOCUMENT_ID + "</td>");
+	                $(tr).append("<td>" + data[i].NAME + "</td>");
+	                $(tr).append("<td>" + data[i].HEAD_NAME + "</td>");
+	                $(tr).append("<td>" + data[i].GENDER + "</td>");
+	                $(tr).append("<td>" + data[i].AGE_DOB + "</td>");
+	                $(tr).append("<td>" + data[i].MARITAL_STATUS + "</td>");
+	                $(tr).append("<td>" + data[i].ADDRESS + "</td>");
+	                $(tr).append("<td>" + data[i].DISTRICT_NAME + "</td>");
+	                $(tr).append("<td>" + data[i].TEHSIL_NAME + "</td>");
+	                $(tr).append("<td>" + data[i].UNIONCOUNCIL_NAME + "</td>");
+	                $(tr).append("<td>" + data[i].VILLAGE_NAME + "</td>");
+	                $(tr).append("<td>" + data[i].POSTOFFICE_NAME + "</td>");
+	                $(tr).append("<td>" + data[i].PIN_CODE + "</td>");
+	                $(tr).append("<td>" + data[i].STATUS + "</td>");
+	                $(tr).append("<td>" + data[i].INSERTION_TIMESTAMP + "</td>");
+	                $(tr).append("<td>" + data[i].POB_DWH + "</td>");
+	                $(tr).append("<td>" + data[i].RELIGION_DWH + "</td>");
+	                $(tr).append("<td>" + data[i].MOTHER_NAME_DWH + "</td>");
+	                $(tr).append("<td>" + data[i].MOTHER_TONUGE_DWH + "</td>");
+	                $(tr).append("<td>" + data[i].EDUCATION_DWH + "</td>");
+	                $(tr).append("<td>" + data[i].OCCUPATION_DWH + "</td>");
+	                $('#example').append(tr);
+                }
+              }
+	        }
+	      });
+        }
+    </script>
+    <!-- AJAX CALL ENDS HERE -->
+    <!-- script of datatable -->
+    <script>
+		$(document).ready(function() {
+		    $('#example').DataTable( {
+		        initComplete: function () {
+		            this.api().columns([0, 4, 6, 8, 9]).every( function () {
+
+		                var column = this;
+		                var select = $('<select><option value=""></option></select>')
+		                    .appendTo( $(column.footer()).empty() )
+		                    .on( 'change', function () {
+		                        var val = $.fn.dataTable.util.escapeRegex(
+		                            $(this).val()
+		                        );
+		                        column
+		                            .search( val ? '^'+val+'$' : '', true, false )
+		                            .draw();
+		                    } );
+		                column.cells('', column[0]).render('display').sort().unique().each( function ( d, j ) {
+		                    select.append( '<option value="'+d+'">'+d+'</option>' )
+		                } );
+		            } );
+		        },
+		        "scrollY": 400,
+		        "scrollX": true} );
+		} );
+		</script>
+    <!-- script of datatable ends here -->
+  </head>  
+
+  <body onload="load();">
+  <div class="col-sm-12 feature" style="padding-top: 10px;height: 650px;">            
+	    <div class="feature-category-content lazy" data-loader="insightsLoader"  >
+			<table id="example" class="display nowrap" style="width:100%"> 
+				<thead>
+					<tr>
+						<th>HHR_ID</th>
+						<th>DOCUMENT_ID</th>
+						<th>NAME</th>
+						<th>HEAD_NAME</th>
+						<th>GENDER</th>
+						<th>AGE_DOB</th>
+						<th>MARITAL_STATUS</th>
+						<th>ADDRESS</th>
+						<th>DISTRICT_NAME</th>
+						<th>TEHSIL_NAME</th>
+						<th>UNIONCOUNCIL_NAME</th>
+						<th>VILLAGE_NAME</th>
+						<th>POSTOFFICE_NAME</th>
+						<th>PIN_CODE</th>
+						<th>STATUS</th>
+						<th>INSERTION_TIMESTAMP</th>
+						<th>POB_DWH</th>
+						<th>RELIGION_DWH</th>
+						<th>MOTHER_NAME_DWH</th>
+						<th>MOTHER_TONUGE_DWH</th>
+						<th>EDUCATION_DWH</th>
+						<th>OCCUPATION_DWH</th>
+
+					</tr>
+				</thead>
+				<tbody>
+				   
+				</tbody>
+				<tfoot>
+					<tr>
+	                 	<th title="Field #1">HHR_ID</th>
+						<th title="Field #2">DOCUMENT_ID</th>
+						<th title="Field #3">NAME</th>
+						<th title="Field #4">HEAD_NAME</th>
+						<th title="Field #5">GENDER</th>
+						<th title="Field #6">AGE_DOB</th>
+						<th title="Field #7">MARITAL_STATUS</th>
+						<th title="Field #8">ADDRESS</th>
+						<th title="Field #9">DISTRICT_NAME</th>
+						<th title="Field #10">TEHSIL_NAME</th>
+						<th title="Field #11">UNIONCOUNCIL_NAME</th>
+						<th title="Field #12">VILLAGE_NAME</th>
+						<th title="Field #13">POSTOFFICE_NAME</th>
+						<th title="Field #14">PIN_CODE</th>
+						<th title="Field #15">STATUS</th>
+						<th title="Field #16">INSERTION_TIMESTAMP</th>
+						<th title="Field #17">POB_DWH</th>
+						<th title="Field #18">RELIGION_DWH</th>
+						<th title="Field #19">MOTHER_NAME_DWH</th>
+						<th title="Field #20">MOTHER_TONUGE_DWH</th>
+						<th title="Field #21">EDUCATION_DWH</th>
+						<th title="Field #22">OCCUPATION_DWH</th>
+		            </tr>
+				</tfoot>
+			</table> 
+	    </div>
+	 </div> 
+
+	<div style="padding-top: 60px; padding-bottom: 40px;"> </div>
+	<div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+	<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+	<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">   
+	<div class="cmp-globalfooter aem-GridColumn aem-GridColumn--default--12"><footer class="container footer">
+ 	
+  </body>
+</html>
