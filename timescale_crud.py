@@ -1,6 +1,6 @@
 from flask import Flask, render_template,redirect,request
 from sqlalchemy import create_engine, sql
-from bokeh.plotting import figure,show,output_file
+#from bokeh.plotting import figure,show,output_file
 import json
 
 import pandas as pd
