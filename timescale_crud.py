@@ -56,7 +56,7 @@ def insert():
  # ]
 	try:
 		engine = create_db_conn()
-		df = pd.read_sql_query('Insert Into' +' rating '+'(t11,t12,t13,t14,t2,t3,t41,t42,name,email,mob,birthday,comments)'+' '+'Values'+' '+'('+str(points['t11'])+','+str(points['t12'])+','+str(points['t13'])+','+str(points['t14'])+','+str(points['t2'])+','+str(points['t3'])+','+str(points['t41'])+','+"'"+str(points['t42'])+"'"+','+"'"+str(points['name'])+"'"+','+"'"+str(points["email"])+"'"+','+"'"+str(points['mob'])+"'"+','+"'"+str(points['birthday'])+"'"+"'"+str(points['comments'])+"'"+')'+';',con=engine)
+		df = pd.read_sql_query('Insert Into' +' rating '+'(t11,t12,t13,t14,t2,t3,t41,t42,name,email,mob,birthday,comments)'+' '+'Values'+' '+'('+str(points['t11'])+','+str(points['t12'])+','+str(points['t13'])+','+str(points['t14'])+','+str(points['t2'])+','+str(points['t3'])+','+str(points['t41'])+','+"'"+str(points['t42'])+"'"+','+"'"+str(points['name'])+"'"+','+"'"+str(points["email"])+"'"+','+"'"+str(points['mob'])+"'"+','+"'"+str(points['birthday'])+"'"+','+"'"+str(points['comments'])+"'"+')'+';',con=engine)
 		pd.DataFrame.to_sql(df,tablename, engine,if_exists='append')
 		return 'successfull'
 	except Exception as e:
