@@ -26,43 +26,45 @@ def select():
 	df = None
 	try:
 		engine = create_db_conn()
-		tablename = request.args.get('tablename')
-		df = pd.read_sql_query('select * from'+' '+tablename+';',con=engine)
+		df = pd.read_sql_query('select * from rating'+';',con=engine)
 		return render_template('index.html', Col=df)
 	except Exception as e:
 		print(e)
-	return 'OK'
+		return 'unsuccessfull'
+	return 'successfull'
 
 
 @app.route('/insert', methods = ['PUT'])
 def insert():
-# 	points = [{
-# 	't11':'4',
-# 	't12':'2',
-# 	't13':'3',
-# 	't14':'2',
-# 	't2':'4',
-# 	't3':'2',
-# 	't41':'4',
-# 	't42':'2',
-# 	'name':"asharburney",
-# 	'email':"ashar@inbox",
-# 	'mob':"0331829169",
-# 	'birthday':"1994/03/03"
-# } 
-# ]
+
+	data=request.data
+	points = json.loads(data)
+	# points = [{
+	# 't11':'4',
+	# 't12':'2',
+	# 't13':'3',
+	# 't14':'2',
+	# 't2':'4',
+	# 't3':'2',
+	# 't41':'4',
+	# 't42':'2',
+	# 'name':"asharburney",
+	# 'email':"ashar@inbox",
+	# 'mob':"0331829169",
+	# 'birthday':"1994/03/03"
+ # } 
+ # ]
 	try:
 		engine = create_db_conn()
-		tablename = request.args.get('tablename')
-		points = request.args.get('points')
 		points=json.dumps(points)
 		points=json.loads(points)
-		df = pd.read_sql_query('Insert Into' +' '+tablename+' '+'(t11,t12,t13,t14,t2,t3,t41,t42,name,email,mob,birthday)'+' '+'Values'+' '+'('+points[0]['t11']+','+points[0]['t12']+','+points[0]['t13']+','+points[0]['t14']+','+points[0]['t2']+','+points[0]['t3']+','+points[0]['t41']+','+points[0]['t42']+','+"'"+points[0]['name']+"'"+','+"'"+points[0]["email"]+"'"+','+"'"+points[0]['mob']+"'"+','+"'"+points[0]['birthday']+"'"+')'+';',con=engine)
+		df = pd.read_sql_query('Insert Into' +' rating '+'(t11,t12,t13,t14,t2,t3,t41,t42,name,email,mob,birthday,comments)'+' '+'Values'+' '+'('+points[0]['t11']+','+points[0]['t12']+','+points[0]['t13']+','+points[0]['t14']+','+points[0]['t2']+','+points[0]['t3']+','+points[0]['t41']+','+points[0]['t42']+','+"'"+points[0]['name']+"'"+','+"'"+points[0]["email"]+"'"+','+"'"+points[0]['mob']+"'"+','+"'"+points[0]['birthday']+"'"+"'"+points[0]['comments']+"'"+')'+';',con=engine)
 		pd.DataFrame.to_sql(df,tablename, engine,if_exists='append')
-
+		return 'successfull'
 	except Exception as e:
 		print(str(e))
-	return"ok"
+		return 'unsuccessfull'
+	
 
 
 
