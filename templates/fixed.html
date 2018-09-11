@@ -1,0 +1,156 @@
+<html>
+<head>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"> </script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
+<script src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"> </script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css">
+<link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.6/css/fixedColumns.dataTables.min.css" type="text/css">
+
+
+
+
+
+
+<!-- ===================== call API for data values ====================== -->
+<script>
+    $(document).ready(function() {
+        var ajax = new XMLHttpRequest();
+        ajax.onload = datatvalues;
+        ajax.onerror = errorFunctionName;
+        ajax.open("GET", "http://ec2-18-191-78-70.us-east-2.compute.amazonaws.com:5000/select", true);
+        // ajax.open("GET", "http://localhost:5000/select", true);
+        ajax.send();
+
+
+        function datatvalues() {
+           // console.log(this);// log the response
+            if (this.status == 200) {// request succeeded
+
+                tableData='<thead>'+
+            '<tr>'+
+               '<th title="Field #1">T11</th>'+
+                '<th title="Field #2">T12</th>'+
+                '<th title="Field #3">T13</th>'+
+                '<th title="Field #4">T14</th>'+
+                '<th title="Field #5">T2</th>'+
+                '<th title="Field #6">T3</th>'+
+                '<th title="Field #7">T41</th>'+
+                '<th title="Field #8">T42</th>'+
+                '<th title="Field #9">NAME</th>'+
+                '<th title="Field #10">EMAIL</th>'+
+                '<th title="Field #11">MOBILE NUMBER</th>'+
+                '<th title="Field #12">BIRTHDAY</th>'+
+                '<th title="Field #13">COMMENTS</th>'+
+            '</tr>'+
+        '</thead>'+
+
+        // '<tfoot>'+
+        //     '<tr>'+
+        //        '<th title="Field #1">T11</th>'+
+        //         '<th title="Field #2">T12</th>'+
+        //         '<th title="Field #3">T13</th>'+
+        //         '<th title="Field #4">T14</th>'+
+        //         '<th title="Field #5">T2</th>'+
+        //         '<th title="Field #6">T3</th>'+
+        //         '<th title="Field #7">T41</th>'+
+        //         '<th title="Field #8">T42</th>'+
+        //         '<th title="Field #9">NAME</th>'+
+        //         '<th title="Field #10">EMAIL</th>'+
+        //         '<th title="Field #11">MOBILE NUMBER</th>'+
+        //         '<th title="Field #12">BIRTHDAY</th>'+
+        //         // '<th title="Field #13">COMMENTS</th>'+
+        //     '</tr>'+
+        // '</tfoot>'+
+        
+       '<tbody>';
+        
+                var tjson = JSON.parse(this.responseText);
+                var jsonData = JSON.parse(this.responseText);
+                console.log(jsonData);
+                if(jsonData != "empty")
+                {
+                    var count = jsonData.length;
+                   // console.log(count);
+                    for (var i = 0; i < count; i++) 
+                    {
+                        console.log(jsonData[i])
+                       // alert(JSON.stringify(jsonData[i]))
+                        output = '<tr>';
+                        output+='<td>'+jsonData[i]["t11"]+'</td>';
+                        output+='<td>'+jsonData[i]["t12"]+'</td>';
+                        output+='<td>'+jsonData[i]["t13"]+'</td>';
+                        output+='<td>'+jsonData[i]["t14"]+'</td>';
+                        output+='<td>'+jsonData[i]["t2"]+'</td>';
+                        output+='<td>'+ jsonData[i]["t3"] +'</td>';
+                        output+='<td>'+jsonData[i]["t41"]+'</td>';
+                        output+='<td>'+jsonData[i]["t42"]+'</td>';
+                        output+='<td>'+jsonData[i]["name"]+'</td>';
+                        output+='<td>'+ jsonData[i]["email"] +'</td>';
+                        output+='<td>'+ jsonData[i]["mob"] +'</td>';
+                        output+='<td>'+ jsonData[i]["birthday"] +'</td>';
+                        output+='<td>'+jsonData[i]["comments"]+'</td>';
+                        output+='</tr>';
+                        tableData+=output;
+                    }
+                    
+                }
+                tableData+='</tbody>'
+                $('#example').append(tableData);
+                $('#example').DataTable( {
+                "scrollY":        400,
+                "scrollX":        true,
+                "scrollCollapse": true,
+                "paging":         true,
+                "lengthMenu": [[25, 50, -1], [25, 50, "All"]],
+                initComplete: function () {
+                    this.api().columns([5,9,10,11]).every( function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo( $(column.footer()).empty() )
+                            .on( 'change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+        
+                                column
+                                    .search( val ? '^'+val+'$' : '', true, false )
+                                    .draw();
+                            } );
+        
+                        column.data().unique().sort().each( function ( d, j ) {
+                            select.append( '<option value="'+d+'">'+d+'</option>' )
+                        } );
+                    } );
+                }
+            } );
+
+            
+            } else {
+               // handle more HTTP response codes here;
+            }
+        }
+        function errorFunctionName(e) {
+            console.log(this);
+            console.error(e);
+            
+        }
+        
+
+    
+        } );
+</script>
+
+</head>
+
+<body>
+
+<table id="example" class="stripe row-border order-column" style="width:100%",cellspacing=0>
+        
+        
+
+    </table>
+
+</body>
+</html>

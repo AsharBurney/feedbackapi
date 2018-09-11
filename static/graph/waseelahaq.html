@@ -1,0 +1,74 @@
+<html>
+<script type="text/javascript" src="../amcharts/amcharts.js"></script>
+<script type="text/javascript" src="../amcharts/pie.js"></script>
+<script type="text/javascript" src="../amcharts/serial.js"></script>
+<script src="../amcharts/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="../amcharts/plugins/export/export.css" type="text/css" media="all" />
+<script type="text/javascript" src="../amcharts/themes/mytheme.js"></script>
+
+
+<script>
+//Pie chart
+var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "pie",
+  "theme": "mytheme",
+  "titles": [ {
+    "text": "Loan Money Investment by Business",
+    "size": 16
+  } ],
+  "dataProvider": [ {
+    "Business": "Livestock & Dairy Farming Business",
+    "Loan Money Investment": 49
+  }, {
+    "Business": "General Store",
+    "Loan Money Investment": 23
+  }, {
+    "Business": "Rikshaw",
+    "Loan Money Investment": 2
+  }, {
+    "Business": "Textile (Cloth shop & tailoring)",
+    "Loan Money Investment": 7
+  }, {
+    "Business": "Construction  (Welding etc)",
+    "Loan Money Investment": 3
+  }, {
+    "Business": "Agriculture",
+    "Loan Money Investment": 4
+  }, {
+    "Business": "Others",
+    "Loan Money Investment": 12
+  }],
+  "valueField": "Loan Money Investment",
+  "titleField": "Business",
+  "startEffect": "elastic",
+  "startDuration": 2,
+  "labelRadius": 15,
+  "innerRadius": "50%",
+  "depth3D": 10,
+  "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+  "angle": 15,
+  "export": {
+    "enabled": true
+  }
+} );
+
+
+
+
+
+</script>
+
+
+<body>
+  
+
+  <div id="chartdiv" style="width: 100%; height: 100%;"></div>
+
+  
+</body>
+
+
+
+
+
+</html>

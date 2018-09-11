@@ -1,0 +1,212 @@
+<html>
+<script type="text/javascript" src="../amcharts/amcharts.js"></script>
+<script type="text/javascript" src="../amcharts/pie.js"></script>
+<script type="text/javascript" src="../amcharts/serial.js"></script>
+<script src="../amcharts/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="../amcharts/plugins/export/export.css" type="text/css" media="all" />
+<script type="text/javascript" src="../amcharts/themes/mytheme.js"></script>
+<script type="text/javascript" src="../amcharts/themes/dark.js"></script>
+
+
+<script>
+//Line graph WeT - Yearwise admissions 1
+var chart = AmCharts.makeChart("chartdiv3", {
+  "type": "serial",
+  "theme": "mytheme",
+  "dataProvider": [{
+    "category": "2014",
+    "GB": 7758,
+    "AJK": 1612,
+    "Baluchistan":1989
+
+  }, {
+    "category": "2015",
+    "GB": 12876,
+    "AJK": 30769,
+    "Baluchistan":22435
+  }, {
+    "category": "2016",
+    "GB": 1887,
+    "AJK": 1804,
+    "Baluchistan":1981
+  }],
+  "valueAxes": [{
+    "gridColor": "#FFFFFF",
+    "gridAlpha": 0.2,
+    "dashLength": 0
+  }],
+  "gridAboveGraphs": true,
+  "startDuration": 1,
+  "graphs": [{
+    "title": "GB",
+    "balloonText": "Admissions in [[title]]: <b>[[value]]</b>",
+    "bullet": "round",
+    "bulletSize": 10,
+    "bulletBorderColor": "#ffffff",
+    "bulletBorderAlpha": 1,
+    "bulletBorderThickness": 2,
+    "valueField": "GB",
+    "lineThickness": 2,
+    "lineColor": "#9e0113"
+  }, {
+    "title": "AJK",
+    "balloonText": "Admissions in [[title]]: <b>[[value]]</b>",
+    "bullet": "round",
+    "bulletSize": 10,
+    "bulletBorderColor": "#ffffff",
+    "bulletBorderAlpha": 1,
+    "bulletBorderThickness": 2,
+    "valueField": "AJK",
+    "lineThickness": 2,
+    "lineColor": "#0f5991"
+    
+  },
+  {
+    "title": "Baluchistan",
+    "balloonText": "Admissions in [[title]]: <b>[[value]]</b>",
+    "bullet": "round",
+    "bulletSize": 10,
+    "bulletBorderColor": "#ffffff",
+    "bulletBorderAlpha": 1,
+    "bulletBorderThickness": 2,
+    "valueField": "Baluchistan",
+    "lineThickness": 2,
+    "lineColor": "#993b00"
+    
+  }],
+  "chartCursor": {
+    "categoryBalloonEnabled": false,
+    "cursorAlpha": 0,
+    "zoomable": false
+  },
+  "categoryField": "category",
+  "categoryAxis": {
+    "title": "Year",
+    "gridPosition": "start",
+    "gridAlpha": 0
+  },
+   "valueAxes":[{
+    "title": "Number of Admissions",
+    "gridAlpha": 0
+  }],
+ 
+  "legend": {},
+  "titles": [
+        {
+            "text": "Waseela-e-Taleem Admissions - Yearly",
+            "size": 14
+            
+        }]
+});
+
+
+
+//Yearwise admissions 2
+
+var chart = AmCharts.makeChart("chartdiv4", {
+  "type": "serial",
+  "theme": "mytheme",
+  "dataProvider": [{
+    "category": "2014",
+    "KP": 4832,
+    "Sindh": 2664,
+    "Punjab":0
+
+  }, {
+    "category": "2015",
+    "KP": 206386,
+    "Sindh": 411626,
+    "Punjab":267008
+
+  }, {
+    "category": "2016",
+    "KP": 40962,
+    "Sindh": 80441,
+    "Punjab":175796
+
+  }],
+  "valueAxes": [{
+    "gridColor": "#FFFFFF",
+    "gridAlpha": 0.2,
+    "dashLength": 0
+  }],
+  "gridAboveGraphs": true,
+  "startDuration": 1,
+  "graphs": [{
+    "title": "KP",
+    "balloonText": "Admissions in [[title]]: <b>[[value]]</b>",
+    "bullet": "round",
+    "bulletSize": 10,
+    "bulletBorderColor": "#ffffff",
+    "bulletBorderAlpha": 1,
+    "bulletBorderThickness": 2,
+    "valueField": "KP",
+    "lineThickness": 2,
+    "lineColor": "#993b00"
+
+  }, {
+    "title": "Sindh",
+    "balloonText": "Admissions in [[title]]: <b>[[value]]</b>",
+    "bullet": "round",
+    "bulletSize": 10,
+    "bulletBorderColor": "#ffffff",
+    "bulletBorderAlpha": 1,
+    "bulletBorderThickness": 2,
+    "valueField": "Sindh",
+    "lineThickness": 2,
+    "lineColor": "#0f5991"
+  },
+  {
+    "title": "Punjab",
+    "balloonText": "Admissions in [[title]]: <b>[[value]]</b>",
+    "bullet": "round",
+    "bulletSize": 10,
+    "bulletBorderColor": "#ffffff",
+    "bulletBorderAlpha": 1,
+    "bulletBorderThickness": 2,
+    "valueField": "Punjab",
+    "lineThickness": 2,
+    "lineColor": "#9e0113"
+    
+  }],
+  "chartCursor": {
+    "categoryBalloonEnabled": false,
+    "cursorAlpha": 0,
+    "zoomable": false
+  },
+  "categoryField": "category",
+  "categoryAxis": {
+    "title": "Year",
+    "gridPosition": "start",
+    "gridAlpha": 0
+  },
+   "valueAxes":[{
+    "title": "Number of Admissions",
+    "gridAlpha": 0
+  }],
+ 
+  "legend": {},
+  "titles": [
+        {
+            "text": "Waseela-e-Taleem Admissions - Yearly",
+            "size": 14
+            
+        }]
+});
+
+
+
+</script>
+
+
+<body>
+  
+ <div id="chartdiv3" style="width: 840px; height: 600px;"></div>
+  <div id="chartdiv4" style="width: 840px; height: 600px;"></div>
+</body>
+
+
+
+
+
+</html>

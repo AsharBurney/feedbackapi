@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+<head>
+	<script src="dist/Chart.js"></script>
+	<script src="utils.js"></script>
+	<style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+</head>
+
+<body>
+	<div style="width: 100%">
+		<canvas id="canvas"></canvas>
+	</div>
+	
+	<script>
+		var chartData = {
+			labels: ['2014 Q1','2014 Q2','2014 Q3','2014 Q4','2015 Q1','2015 Q2','2015 Q3','2015 Q4','2016 Q1'],
+			datasets: [{
+				type: 'line',
+				label: 'Total Payment (PKR)',
+				borderColor: window.chartColors.yellow,
+				backgroundColor: window.chartColors.yellow,
+				borderWidth: 2,
+				fill: false,
+				data: [13129200,22776000,20538000,21262800,171508500,421479750,316872750,593439750,626107500,124194750]
+			}, {
+				type: 'bar',
+				label: 'Admission Payment (PKR)',
+				backgroundColor: window.chartColors.red,
+				data: [0,10686600,0,3000,152677800,279932250,9780750,216006000,87243000,124194750],
+				borderColor: 'white',
+				borderWidth: 2
+			}, {
+				type: 'bar',
+				label: 'Attendance Payment (PKR)',
+				backgroundColor: window.chartColors.blue,
+				data: [13129200,12089400,20538000,21259800,18830700,141547500,307092000,377433750,538864500,0]
+			}]
+
+		};
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myMixedChart = new Chart(ctx, {
+				type: 'bar',
+				data: chartData,
+				options: {
+					responsive: true,
+					title: {
+						display: true,
+						text: 'CCT-WeT Payments'
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: true
+					}
+				}
+			});
+		};
+
+		
+	</script>
+</body>
+
+</html>

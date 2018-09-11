@@ -2,11 +2,16 @@ from flask import Flask, render_template,redirect,request
 from sqlalchemy import create_engine, sql
 #from bokeh.plotting import figure,show,output_file
 import json
-
+from bson import ObjectId
 import pandas as pd
 
 app = Flask(__name__)
 
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
 
 def create_db_conn():
 	engine = create_engine('postgresql://postgres:123@localhost:5432/feedback')
@@ -19,7 +24,7 @@ def hello_world():
 	name = "ashar"
 	return render_template('index.html', author=author, name=name)
 
-@app.route('/select', methods = ['GET'])
+@app.route('/select', methods=['GET','POST'])
 def select():
 	
 
@@ -27,13 +32,22 @@ def select():
 	try:
 		engine = create_db_conn()
 		df = pd.read_sql_query('select * from rating'+';',con=engine)
-		return render_template('index.html', Col=df)
+		df=df.to_json(orient="records")
+		print(df)		
+		return df
 	except Exception as e:
 		print(e)
 		return 'unsuccessfull'
 	return 'successfull'
 
 
+@app.route('/bda')
+def bdata():
+    return render_template('index.html')
+
+@app.route('/tbl')
+def tblm():
+    return render_template('fixed.html')
 @app.route('/insert', methods = ['PUT'])
 def insert():
 
